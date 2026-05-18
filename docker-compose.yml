@@ -1,0 +1,17 @@
+services:
+  api-gateway:
+    image: nginx:alpine
+    container_name: outfit_gateway
+    ports:
+      - "80:80"
+    volumes:
+      - ./maps.conf:/etc/nginx/conf.d/00-maps.conf:ro
+      - ./gateway.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - wardrobe-shared
+    restart: on-failure
+
+networks:
+  wardrobe-shared:
+    external: true
+    name: ${WARDROBE_DOCKER_NETWORK:-wardrobe-service_wardrobe-network}
