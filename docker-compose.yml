@@ -1,5 +1,7 @@
 services:
   api-gateway:
+    env_file:
+      - ../../deploy.env
     image: nginx:alpine
     container_name: outfit_gateway
     ports:
